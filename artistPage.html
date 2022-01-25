@@ -228,12 +228,15 @@
                     <div class='d-flex text-white'>
                         <div class='col-4 eminemTable '>
                             <button class='btn btn-primary' onclick="fetchEminem()">EMINEN</button>
+                            <div class="btn btn-primary" onclick='howManyEminem()'>how many song</div>
                         </div>
                         <div class="col-4 metallica">
-                            <button class="btn btn-primary" onclick='fecthMetallica()'>METALLICA</button>
+                            <button class="btn btn-primary" onclick='fetchMetallica()'>METALLICA</button>
+                            <div class="btn btn-primary" onclick='howManyMetallica()'>how many song</div>
                         </div>
                         <div class="col-4 behemoth">
-                            <button class="btn-primary" onclick=fecthBehemoth()>BEHEMOTH</button>
+                            <button class="btn-primary" onclick=fetchBehemoth()>BEHEMOTH</button>
+                            <div class="btn btn-primary" onclick='howManyBehemoth()'>how many song</div>
                         </div>
                     </div>
 
@@ -254,6 +257,7 @@
             crossorigin="anonymous"></script>
 
         <script>
+            //exercise 1
             const fetchEminem = () => {
                 fetch('https://striveschool-api.herokuapp.com/api/deezer/search?q=eminem', {
                     method: 'GET',
@@ -273,7 +277,7 @@
                     })
                     .catch(error => console.log(error))
             }
-            const fecthMetallica = () => {
+            const fetchMetallica = () => {
                 fetch('https://striveschool-api.herokuapp.com/api/deezer/search?q=metallica', {
                     method: 'GET',
                 })
@@ -292,7 +296,7 @@
                     })
                     .catch(error => console.log(error))
             }
-            const fecthBehemoth = () => {
+            const fetchBehemoth = () => {
                 fetch('https://striveschool-api.herokuapp.com/api/deezer/search?q=behemoth', {
                     method: 'GET',
                 })
@@ -311,6 +315,35 @@
                     })
                     .catch(error => console.log(error))
             }
+            //exercise 2
+            const howManyEminem = () => {
+                fetch('https://striveschool-api.herokuapp.com/api/deezer/search?q=eminem', {
+                    method: 'GET',
+                })
+                    .then(response => response.json())
+                    .then(songArray => {
+                        console.log(songArray.data.length)
+                    })
+            }
+            const howManyMetallica = () => {
+                fetch('https://striveschool-api.herokuapp.com/api/deezer/search?q=metallica', {
+                    method: 'GET',
+                })
+                    .then(response => response.json())
+                    .then(songArray => {
+                        console.log(songArray.data.length)
+                    })
+            }
+            const howManyBehemoth = () => {
+                fetch('https://striveschool-api.herokuapp.com/api/deezer/search?q=behemoth', {
+                    method: 'GET',
+                })
+                    .then(response => response.json())
+                    .then(songArray => {
+                        console.log(songArray.data.length)
+                    })
+            }
+
         </script>
 
 
