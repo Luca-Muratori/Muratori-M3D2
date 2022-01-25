@@ -228,15 +228,18 @@
                     <div class='d-flex text-white'>
                         <div class='col-4 eminemTable '>
                             <button class='btn btn-primary' onclick="fetchEminem()">EMINEN</button>
-                            <div class="btn btn-primary" onclick='howManyEminem()'>how many song</div>
+                            <div class="btn btn-primary" onclick='howManyEminem()'>count unique</div>
+                            <ol></ol>
                         </div>
                         <div class="col-4 metallica">
                             <button class="btn btn-primary" onclick='fetchMetallica()'>METALLICA</button>
-                            <div class="btn btn-primary" onclick='howManyMetallica()'>how many song</div>
+                            <div class="btn btn-primary" onclick='howManyMetallica()'>count unique</div>
+                            <ol></ol>
                         </div>
                         <div class="col-4 behemoth">
                             <button class="btn btn-primary" onclick=fetchBehemoth()>BEHEMOTH</button>
-                            <div class="btn btn-primary" onclick='howManyBehemoth()'>how many song</div>
+                            <div class="btn btn-primary" onclick='howManyBehemoth()'>count unique</div>
+                            <ol></ol>
                         </div>
                     </div>
 
@@ -264,13 +267,13 @@
                 })
                     .then(response => response.json())
                     .then(songArray => {
-                        const row = document.querySelector('.eminemTable')
+                        const row = document.querySelector('.eminemTable>ol')
                         for (let i = 0; i < songArray.data.length; i++) {
                             const data = songArray.data[i]
                             const col = document.createElement('div')
                             col.classList.add('col-3')
                             col.innerHTML = `
-                                            <h5 class="card-title" style="width: 236px;">${data.title}</h5>
+                                            <li class="card-title" style="width: 236px;">${data.title}</li>
                                             `
                             row.appendChild(col)
                         }
@@ -283,13 +286,13 @@
                 })
                     .then(response => response.json())
                     .then(songArray => {
-                        const row = document.querySelector('.metallica')
+                        const row = document.querySelector('.metallica>ol')
                         for (let i = 0; i < songArray.data.length; i++) {
                             const data = songArray.data[i]
                             const col = document.createElement('div')
                             col.classList.add('col-3')
                             col.innerHTML = `
-                                            <h5 class="card-title" style="width: 236px;">${data.title}</h5>
+                                            <li class="card-title" style="width: 236px;">${data.title}</li>
                                             `
                             row.appendChild(col)
                         }
@@ -302,13 +305,13 @@
                 })
                     .then(response => response.json())
                     .then(songArray => {
-                        const row = document.querySelector('.behemoth')
+                        const row = document.querySelector('.behemoth>ol')
                         for (let i = 0; i < songArray.data.length; i++) {
                             const data = songArray.data[i]
                             const col = document.createElement('div')
                             col.classList.add('col-3')
                             col.innerHTML = `
-                                            <h5 class="card-title" style="width: 236px;">${data.title}</h5>
+                                            <li class="card-title" style="width: 236px;">${data.title}</li>
                                             `
                             row.appendChild(col)
                         }
@@ -322,31 +325,73 @@
                 })
                     .then(response => response.json())
                     .then(songArray => {
-                        console.log(songArray.data.length)
+                        let arr = []
+                        for (let i = 0; i < songArray.data.length; i++) {
+                            const data = songArray.data[i].title
+                            var isDuplicated = false
+                            for (j = 0; j < arr.length; j++) {
+                                if (arr[j] === data) {
+                                    isDuplicated = true
+                                    break
+                                }
+                            }
+                            if (!isDuplicated) {
+                                arr.push(data)
+                            }
+                        }
+                        console.log(`The are ${arr.length} unique song`)
                     })
             }
+
             const howManyMetallica = () => {
                 fetch('https://striveschool-api.herokuapp.com/api/deezer/search?q=metallica', {
                     method: 'GET',
                 })
                     .then(response => response.json())
                     .then(songArray => {
-                        console.log(songArray.data.length)
+                        let arr = []
+                        for (let i = 0; i < songArray.data.length; i++) {
+                            const data = songArray.data[i].title
+                            var isDuplicated = false
+                            for (j = 0; j < arr.length; j++) {
+                                if (arr[j] === data) {
+                                    isDuplicated = true
+                                    break
+                                }
+                            }
+                            if (!isDuplicated) {
+                                arr.push(data)
+                            }
+                        }
+                        console.log(`The are ${arr.length} unique song`)
                     })
             }
+
             const howManyBehemoth = () => {
                 fetch('https://striveschool-api.herokuapp.com/api/deezer/search?q=behemoth', {
                     method: 'GET',
                 })
                     .then(response => response.json())
                     .then(songArray => {
-                        console.log(songArray.data.length)
+                        let arr = []
+                        for (let i = 0; i < songArray.data.length; i++) {
+                            const data = songArray.data[i].title
+                            var isDuplicated = false
+                            for (j = 0; j < arr.length; j++) {
+                                if (arr[j] === data) {
+                                    isDuplicated = true
+                                    break
+                                }
+                            }
+                            if (!isDuplicated) {
+                                arr.push(data)
+                            }
+                        }
+                        console.log(`The are ${arr.length} unique song`)
                     })
             }
 
         </script>
-
-
 </body>
 
 </html>
